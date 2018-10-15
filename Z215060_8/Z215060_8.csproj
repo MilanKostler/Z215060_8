@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{937F5684-B7D0-452A-848E-D36232002F91}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Z215060_8</RootNamespace>
+    <AssemblyName>Z215060_8</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icons\DeimosBig_DeltaV.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpcNetApi, Version=2.0.2.0, Culture=neutral, PublicKeyToken=78aea80f6827b5ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\OpcNetApi.dll</HintPath>
+    </Reference>
+    <Reference Include="OpcNetApi.Com, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\OpcNetApi.Com.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Devices\Ateq.cs" />
+    <Compile Include="Devices\Machine.cs" />
+    <Compile Include="Devices\SeriovaKomunikace.cs" />
+    <Compile Include="HMI\Alarms.cs" />
+    <Compile Include="HMI\Pocitadlo.cs" />
+    <Compile Include="HMI\PocitadloViewModel.cs" />
+    <Compile Include="HMI\StavStroje.cs" />
+    <Compile Include="HMI\StavStrojeViewModel.cs" />
+    <Compile Include="HMI\UserControlAlarmy.xaml.cs">
+      <DependentUpon>UserControlAlarmy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HMI\ViewModelBase.cs" />
+    <Compile Include="HMI\WindowSerizovani.xaml.cs">
+      <DependentUpon>WindowSerizovani.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InitInfo.cs" />
+    <Compile Include="LogFile.cs" />
+    <Compile Include="Devices\MelexisPTC04.cs" />
+    <Compile Include="OPC\OPCZ215060_8.cs" />
+    <Compile Include="OPC\Item.cs" />
+    <Compile Include="OPC\OPCClient.cs" />
+    <Compile Include="OPC\PlcVariableViewModel.cs" />
+    <Compile Include="OPC\StatistikaKomunikace.cs" />
+    <Compile Include="OPC\WatchDog.cs" />
+    <Compile Include="OPC\WindowShutdown.xaml.cs">
+      <DependentUpon>WindowShutdown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OPC\WinPlcCommunicationDebug.xaml.cs">
+      <DependentUpon>WinPlcCommunicationDebug.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Opravneni\Role.cs" />
+    <Compile Include="Opravneni\WinLogin.xaml.cs">
+      <DependentUpon>WinLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Opravneni\WinZmenaHesla.xaml.cs">
+      <DependentUpon>WinZmenaHesla.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vizualizace\ucVizualizaceStrany.xaml.cs">
+      <DependentUpon>ucVizualizaceStrany.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vizualizace\ucVizualizace.xaml.cs">
+      <DependentUpon>ucVizualizace.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vizualizace\Vizualizace.cs" />
+    <Compile Include="Vizualizace\VizualizaceZ215060_8.cs" />
+    <Compile Include="WindowAbout.xaml.cs">
+      <DependentUpon>WindowAbout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinVyberStrany.xaml.cs">
+      <DependentUpon>WinVyberStrany.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XmlRW.cs" />
+    <Page Include="HMI\UserControlAlarmy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HMI\WindowSerizovani.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="OPC\WindowShutdown.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OPC\WinPlcCommunicationDebug.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Opravneni\WinLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Opravneni\WinZmenaHesla.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vizualizace\ucVizualizaceStrany.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vizualizace\ucVizualizace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowAbout.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinVyberStrany.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <Resource Include="Fonts\Ni7seg.ttf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\DeimosBig_Deimos.ico" />
+    <Resource Include="Icons\DeimosBig_i2.ico" />
+    <Resource Include="Icons\DeimosBig_Otaznik.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\About.png" />
+    <Resource Include="Images\QR.png" />
+    <SplashScreen Include="Images\SplashScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\DeimosBig_DeltaV.ico" />
+    <Resource Include="Icons\DeimosBig_IO2.ico" />
+    <Resource Include="Icons\DeimosBig_Password.ico" />
+    <Resource Include="Icons\DeimosBig_Settings.ico" />
+    <Resource Include="Icons\DeimosBig_Table.ico" />
+    <Resource Include="Icons\DeimosBig_Vynulovat.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\DeimosBig_Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\DeimosBig_ACK.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\KeyboardSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\OPCHDA.dll" />
+    <Content Include="DLL\OpcNetApi.Com.dll" />
+    <Content Include="DLL\OpcNetApi.dll" />
+    <Content Include="DLL\OpcRcw.Ae.dll" />
+    <Content Include="DLL\OpcRcw.Comn.dll" />
+    <Content Include="DLL\OpcRcw.Da.dll" />
+    <Content Include="DLL\OpcRcw.Dx.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="CommUnit">
+      <Guid>{32265E54-5CF5-4E07-9394-F753C5077D6C}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="MLXMPTCommon">
+      <Guid>{CF510421-A845-44C6-A641-A44771342669}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="PSF090367AAMLXModule">
+      <Guid>{2D49BD37-32E6-42E6-904A-3FC2A9A0D5B1}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="PTC04PSFModule">
+      <Guid>{9A88B8AD-37A5-41D7-8C04-28D34CC1B47E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,227 @@
+﻿<Window xmlns:my="clr-namespace:HMI"  x:Class="Z215060_8.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="550" Width="835" WindowState="Maximized" Closing="Window_Closing" Background="White" PreviewKeyDown="Window_PreviewKeyDown" xmlns:my1="clr-namespace:Z215060_8" Loaded="Window_Loaded">
+    <Window.CommandBindings>
+        <CommandBinding Command="Help" CanExecute="navodCanExecute" Executed="comNnavodExecute" />
+    </Window.CommandBindings>
+    <!-- Klávesové zkratky -->
+    <Window.InputBindings>
+        <KeyBinding  Command="Help" Key="F1" /> <!-- Modifiers="Ctrl" -->
+    </Window.InputBindings>
+    <Window.Resources>
+        <Style x:Key="StylButtonu" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="True">
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="UIElement.Opacity" Value="0.5" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#FFF0F5F9" Offset="0" />
+                <GradientStop Color="#FFE6EEF6" Offset="1" />
+            </RadialGradientBrush>
+        </Grid.Background>
+        <DockPanel Width="Auto" Height="Auto">
+            <!-- Menu -->
+            <Menu DockPanel.Dock="Top" Height="23" Name="menu1" Width="Auto" VerticalAlignment="Top">
+                <Menu.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD9E2EB" Offset="0" />
+                        <GradientStop Color="#FFC9D6E7" Offset="1" />
+                    </LinearGradientBrush>
+                </Menu.Background>
+                <MenuItem Header="Servis" >
+                    <MenuItem  Name="menBtnIO" Header="Seřizování..." InputGestureText="F4" ToolTip="Zobrazení dialogu pro seřizování senzorů a ovládacích prvků...">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_IO2.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem  Name="menBtnAck" Header="Err/Ack" InputGestureText="Ctrl+F6" ToolTip="Otvrzení procesní chyby">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Ack.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem  Name="menBtnHome" Header="Home pos..." InputGestureText="Ctrl+F7" ToolTip="Návrat do výchozí pozice">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Home.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Oprávnění" >
+                    <MenuItem  Name="menBtnLogin" Header="Login..." InputGestureText="Ctrl+F5" ToolTip="Přihlášení do vyššího uživatelského oprávnění...">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Password.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem  Name="menBtnLogout" Header="Logout" InputGestureText="F5" ToolTip="Odhlášení z vyššího uživatelského oprávnění..." IsEnabled="False">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Password.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem  Name="menBtnChangePsw" Header="Změnit heslo..." ToolTip="Zobrazí dialog pro změnu hesla vyššího uživatelského oprávnění..." Click="menBtnChangePsw_Click">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Nastavení" >
+                    <MenuItem  Name="menBtnNastaveni" Header="Nastavení..." InputGestureText="F3" ToolTip="Zobrazí dialog pro nastavení zařízení...">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Settings.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem  Name="menBtnVynulovat" Header="Vynulovat..." InputGestureText="F7" ToolTip="Vynulovate statistiky &quot;Vyrobeno&quot;, &quot;OK&quot; a &quot;NOK&quot;...">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Vynulovat.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem  Name="menBtnReceptury" Header="Receptury..." InputGestureText="F10" ToolTip="Editovat tabulku receptur...">
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Table.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem  Name="menBtnVyberRcp" Header="Vybrat typ..." InputGestureText="F11" ToolTip="Vybrat typ výrobku z tabulky receptur a nastavit jej jako aktuální...">
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Help">
+                    <MenuItem Header="Návod" Command="Help" InputGestureText="F1">
+                        <MenuItem.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock>Zobrazí se návod k aplikaci...</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </MenuItem.ToolTip>
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_Otaznik.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Name="MenBtnAbout" Header="About..." InputGestureText="Ctrl+F1">
+                        <MenuItem.ToolTip>
+                            <ToolTip>
+                                <StackPanel>
+                                    <TextBlock>Informace o programu...</TextBlock>
+                                </StackPanel>
+                            </ToolTip>
+                        </MenuItem.ToolTip>
+                        <MenuItem.Icon>
+                            <Image Width="20" Height="20" Source="/Z215060_8;component/Icons/DeimosBig_i2.ico" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
+            <Border DockPanel.Dock="Top" BorderBrush="Silver" BorderThickness="1" Height="1" Width="Auto" />
+            <StackPanel DockPanel.Dock="Top">
+                <StackPanel.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFD9E2EB" Offset="0" />
+                        <GradientStop Color="#FFC9D6E7" Offset="1" />
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <!-- ToolBar -->
+                <ToolBar Height="92" Name="toolBar1" Width="Auto" HorizontalAlignment="Left" Foreground="Black" BorderBrush="{x:Null}">
+                    <ToolBar.Background>
+                        <SolidColorBrush />
+                    </ToolBar.Background>
+                    <Button Name="toolBtnIO" ToolTip="Zobrazení dialogu pro seřizování senzorů a ovládacích prvků... (F4)" Style="{StaticResource StylButtonu}" >
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_IO2.ico" />
+                            <TextBlock Text="Seřizování..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="toolBtnAck" ToolTip="Otvrzení procesní chyby (Ctrl+F6)" Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Ack.ico" />
+                            <TextBlock Text="Err/Ack" HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="toolBtnHome" ToolTip="Návrat do výchozí pozice (Ctrl+F7)" Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Home.ico" />
+                            <TextBlock Text="Home pos..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
+                    <Button Name="toolBtnLogin" ToolTip="Přihlášení do vyššího uživatelského oprávnění... (Ctrl+F5)" Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Password.ico" />
+                            <TextBlock Text="Login..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="toolBtnLogout" ToolTip="Odhlášení z vyššího uživatelského oprávnění... (F5)" Style="{StaticResource StylButtonu}" Visibility="Collapsed">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Password.ico" />
+                            <TextBlock Text="Logout" HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
+                    <Button Name="toolBtnNastaveni" ToolTip="Zobrazí dialog pro nastavení zařízení... (F3)" Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Settings.ico" />
+                            <TextBlock Text="Nastavení..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="toolBtnVynulovat" ToolTip="Vynulovate statistiky &quot;Vyrobeno&quot;, &quot;OK&quot; a &quot;NOK&quot;... (F7)" Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Vynulovat.ico" />
+                            <TextBlock Text="Vynulovat..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="toolBtnReceptury" ToolTip="Editovat tabulku receptur... (F10)" Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Table.ico" />
+                            <TextBlock Text="Receptury..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Separator/>
+                    <Button Name="toolBtnHelp" Command="Help" ToolTip="Zobrazí se návod k aplikaci..." Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_Otaznik.ico" />
+                            <TextBlock Text="Návod" HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Name="toolBtnAbout" ToolTip="Informace o programu..." Style="{StaticResource StylButtonu}">
+                        <StackPanel>
+                            <Image Source="/Z215060_8;component/Icons/DeimosBig_i2.ico" />
+                            <TextBlock Text="About..." HorizontalAlignment="Center">
+                            </TextBlock>
+                        </StackPanel>
+                    </Button>
+                </ToolBar>
+                <Border BorderBrush="Gray" BorderThickness="1" Height="1" Width="Auto" />
+            </StackPanel>
+            <DockPanel Height="auto" VerticalAlignment="Stretch" >
+                <StackPanel Name="StackPanelLadeni" Visibility="Visible" Width="Auto" HorizontalAlignment="Left">
+                    <Button Content="Skrýt panel" Height="22" Name="btnSkryt" Width="105" Margin="1" HorizontalAlignment="Left" Click="btnSkryt_Click" />
+                    <Button Content="OPC connect" Height="22" Name="btnOpcConnect" Width="105" Margin="1" HorizontalAlignment="Left" Click="btnOpcConnect_Click" />
+                    <Button Content="OPC debug" Height="22" Name="btnOpcDebug" Width="105" Margin="1" HorizontalAlignment="Left" Click="btnOpcDebug_Click" />
+                    <Button Content="Zobrazit hodnoty" Height="22" Name="btnHodnoty" Width="105" Margin="1" HorizontalAlignment="Left" Click="btnHodnoty_Click" />
+                    <!--<Button Content="PTC-04 Start/Stop" Height="22" Name="btnMelexis" Width="105" Margin="1" HorizontalAlignment="Left" Click="btnMelexis_Click" />-->
+                    <CheckBox Name="checkBoxIdd" Content="IDD [mA]:" Margin="0" Click="Melexis_Click" />
+                    <CheckBox Name="checkBoxOut" Content="Out [lsb]:" Margin="0" Click="Melexis_Click" />
+                </StackPanel>
+                <Grid>
+                    <my1:ucVizualizace x:Name="ucVizu" />
+                </Grid>      
+            </DockPanel>
+        </DockPanel>
+        <!--Alarmy a chybové hlášky-->
+        <StackPanel Margin="0" VerticalAlignment="Bottom" Height="Auto" Width="Auto" >
+            <my:UserControlAlarmy HorizontalAlignment="Stretch" Margin="0" x:Name="ucAlarmy1" VerticalAlignment="Bottom" Height="150" Visibility="{Binding Path=JeAlarm, Converter={StaticResource boolToVisibility}}"/>
+            <Label Name="labelErrKomunikacePLC" Content="PLC nekomunikuje! Ověřte, že je připojen komunikační kabel, že je PLC zapnuté a v režimu &quot;RUN&quot;." Height="Auto" HorizontalAlignment="Stretch" Margin="0" Visibility="Collapsed" Foreground="Red" FontSize="18" FontWeight="Bold" Background="White" BorderBrush="Silver" BorderThickness="1" />
+        </StackPanel>
+    </Grid>
+</Window>

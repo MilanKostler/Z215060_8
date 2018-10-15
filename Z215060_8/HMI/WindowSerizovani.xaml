@@ -1,0 +1,151 @@
+﻿<Window x:Class="HMI.WindowSerizovani"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:HMI"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Seřizování" Height="745" Width="1010" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.Resources>
+        <!--Data template pro senzory-->
+        <DataTemplate x:Key="senzoryDataTemplate">
+            <Grid Width="66" Height="32" >
+                <Rectangle Height="30" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Center" Stroke="Black" Fill="Silver" RadiusX="3" RadiusY="3" />
+                <Rectangle Height="26" HorizontalAlignment="Stretch" Margin="4,2,4,2" VerticalAlignment="Center" Stroke="Black" Fill="White" RadiusX="2" RadiusY="2" />
+                <Label Name="LabelNazev1" Content="{Binding Nazev}" FontWeight="Bold" FontSize="12" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Padding="2,3,2,3" Margin="5,2,5,2" Height="24" Cursor="No" >
+                    <Label.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="#4BFF0000" Offset="1" />
+                        </LinearGradientBrush>
+                    </Label.Background>
+                </Label>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Value}" Value="true">
+                    <Setter Property="Background" TargetName="LabelNazev1">
+                        <Setter.Value>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="White" Offset="0" />
+                                <GradientStop Color="#4B14FF00" Offset="1" />
+                            </LinearGradientBrush>
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <!--Data template pro ovladani-->
+        <DataTemplate x:Key="ovladaniDataTemplate">
+            <Grid Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="114" />
+                    <ColumnDefinition Width="114" />
+                    <ColumnDefinition Width="72" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Rectangle Grid.ColumnSpan="4" RadiusX="5" RadiusY="5" Stroke="Gray" MinHeight="50">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFFCFEFF" Offset="0" />
+                            <GradientStop Color="#FFE6EEF6" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <ListBox Grid.Column="0" VerticalAlignment="Center" ItemsSource="{Binding Senzory1}" ItemTemplate="{StaticResource senzoryDataTemplate}" PreviewGotKeyboardFocus="listBox_PreviewGotKeyboardFocus" BorderThickness="0" Background="#00000000" Padding="0,5,0,5" />
+                <Button Grid.Column="1" Width="Auto" Height="36" Margin="2,0,5,0" Content="{Binding Text1}" FontSize="20" PreviewMouseLeftButtonDown="Button1_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="Button_PreviewMouseLeftButtonUp" Click="Button1_Click" />
+                <Button Grid.Column="2" Width="Auto" Height="36" Margin="5,0,1,0" Content="{Binding Text2}" FontSize="20" PreviewMouseLeftButtonDown="Button2_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="Button_PreviewMouseLeftButtonUp" Click="Button2_Click"/>
+                <ListBox Grid.Column="3" VerticalAlignment="Center" ItemsSource="{Binding Senzory2}" ItemTemplate="{StaticResource senzoryDataTemplate}" PreviewGotKeyboardFocus="listBox_PreviewGotKeyboardFocus" BorderThickness="0" Background="#00000000" Padding="0,5,0,5" />
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="5,0,0,0">
+                    <Label Content="{Binding Nazev}" FontSize="22" VerticalAlignment="Center" FontWeight="Bold" />
+                    <Label Content="{Binding Popis}" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <!--Data template pro separator-->
+        <DataTemplate x:Key="separatorDataTemplate">
+            <Grid Margin="0,0,0,3" >
+                <Rectangle RadiusX="4" RadiusY="4" Margin="5,3,5,2">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="#FFEFEFEF" Offset="1" />
+                        </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <StackPanel Grid.Column="4" Orientation="Horizontal" Margin="45,0,0,0">
+                    <Label Content="{Binding Nazev}" FontSize="22" VerticalAlignment="Center" FontWeight="Bold" Margin="-20,5,0,5" />
+                    <Label Content="{Binding Popis}" FontSize="18" VerticalAlignment="Center" Margin="0,3,0,0"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        <!--Data template selector-->
+        <local:OvladaniTemplateSelector 
+            OvladaniDataTemplate="{StaticResource ovladaniDataTemplate}"
+            SeparatorDataTemplate="{StaticResource separatorDataTemplate}"
+            x:Key="ovladaniTemplateSelector" />
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="#FFF0F5F9" Offset="0" />
+                <GradientStop Color="#FFE6EEF6" Offset="1" />
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <ListBox Margin="5" Name="listBoxOvladani" ItemsSource="{Binding Ovladanis}" Grid.Column="1" ItemTemplateSelector="{StaticResource ovladaniTemplateSelector}" HorizontalContentAlignment="Stretch"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,3,5,3" >
+            <!--Zrušení označení vybraného item-->
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </ListBox.Resources>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="PreviewKeyDown" Handler="Ovladani_PreviewKeyDown"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <ListBox ItemsSource="{Binding Inputs}" HorizontalAlignment="Stretch" Margin="5" Name="listBoxInputs" VerticalAlignment="Stretch" Width="Auto" PreviewGotKeyboardFocus="listBox_PreviewGotKeyboardFocus">
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="White"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="88" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Width="80" Height="38" >
+                            <Rectangle Height="36" HorizontalAlignment="Stretch" Margin="2,0,2,0" VerticalAlignment="Center" Stroke="Black" Fill="Silver" RadiusX="3" RadiusY="3" />
+                            <Rectangle Height="32" HorizontalAlignment="Stretch" Margin="4,2,4,2" VerticalAlignment="Center" Stroke="Black" Fill="White" RadiusX="2" RadiusY="2" />
+                            <Label Name="LabelNazev1" Content="{Binding Nazev}" FontWeight="Bold" FontSize="18" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Padding="2,3,2,3" Margin="5,2,5,2" Height="30" Cursor="No" >
+                                <Label.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="#4BFF0000" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Label.Background>
+                            </Label>
+                        </Grid>
+                        <Label Grid.Column="1" Content="{Binding Popis}" FontSize="20" VerticalAlignment="Center" />
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Value}" Value="true">
+                            <Setter Property="Background" TargetName="LabelNazev1">
+                                <Setter.Value>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="#4B14FF00" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

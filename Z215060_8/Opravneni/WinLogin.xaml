@@ -1,0 +1,15 @@
+﻿<Window x:Class="HMI.WinLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Přihlášení" Height="150" Width="334" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown" Activated="Window_Activated" Closed="Window_Closed">
+    <Grid>
+        <Button Content="OK" Height="23" HorizontalAlignment="Right" Margin="0,0,112,12" Name="btnOK" VerticalAlignment="Bottom" Width="88" Click="btnOK_Click" />
+        <Button Content="Cancel" Height="23" HorizontalAlignment="Right" IsCancel="True" Margin="0,0,10,12" Name="btnCancel" VerticalAlignment="Bottom" Width="88" />
+        
+        <Label Content="Heslo:" Height="28" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Margin="14,15,0,0" Name="label2" VerticalAlignment="Top" Width="57" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="77,16,0,0" Name="passwordBoxHeslo" VerticalAlignment="Top" Width="108" />
+        <Button Height="39" HorizontalAlignment="Right" Name="btnKeyboad" VerticalAlignment="Top" Width="109" Click="btnKeyboad_Click" ToolTip="Zobrazí softwarovou klávesnici" Margin="0,8,10,0">
+            <Image HorizontalAlignment="Left" VerticalAlignment="Bottom" Source="/Z215060_8;component/Images/KeyboardSmall.png" Margin="0,0,0,0" Stretch="None" />
+        </Button>
+    </Grid>
+</Window>

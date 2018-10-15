@@ -1,0 +1,30 @@
+﻿<Window x:Class="Sablona.WindowAbout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="" Height="416" Width="345" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="StylTextuVelky" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+        </Style>
+        <Style x:Key="StylTextuMaly" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="28" />
+            <Setter Property="FontSize" Value="12" />
+            
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Image Height="340" Width="322" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Top" Source="/Z215060_8;component/Images/About.png" />
+        <Label Content="Program pro vizualizaci výrobního procesu" Margin="2,0,2,141" Name="label1" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Style="{StaticResource StylTextuVelky}" />
+        <Label Content="Verze" HorizontalContentAlignment="Center" Margin="2,0,2,121" Name="labelVersion" VerticalAlignment="Bottom" Style="{StaticResource StylTextuVelky}" />
+        <!-- <Border DockPanel.Dock="Top" BorderBrush="Gray" BorderThickness="1" Height="1" Width="Auto" Margin="5,0,5,116" VerticalAlignment="Bottom" />-->
+        <Label Content="© 2015 Deimos s.r.o." HorizontalContentAlignment="Center" Margin="98,0,2,78" Name="label2" VerticalAlignment="Bottom" Style="{StaticResource StylTextuMaly}" />
+        <Label Content="Štěrboholská 44, 102 00  Praha 10" HorizontalContentAlignment="Center" Margin="98,0,2,59" Name="label3" VerticalAlignment="Bottom" Style="{StaticResource StylTextuMaly}" />
+        <Label Content="www.deimos.cz" Height="32" Margin="141,0,44,36" Name="labelWww" VerticalAlignment="Bottom" FontWeight="Bold" FontSize="16" Foreground="Blue" Cursor="Hand" MouseDown="labelWww_MouseDown" HorizontalContentAlignment="Center" />
+        <Image HorizontalAlignment="Left" VerticalAlignment="Bottom" Source="/Z215060_8;component/Images/QR.png" Margin="12,0,0,14" Stretch="None" />
+        <Button Content="OK" Height="23" HorizontalAlignment="Right" Margin="0,0,12,11" Name="buttonOk" VerticalAlignment="Bottom" Width="128" Click="buttonOk_Click" />
+    </Grid>
+</Window>
